@@ -11,8 +11,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int maxLines = 4;
-  double sliderValue = 10.0;
+  double _sliderValue = 10.0;
   final _scaffoldkey = GlobalKey<ScaffoldState>();
+  TextEditingController _controller = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -103,9 +104,9 @@ class _HomePageState extends State<HomePage> {
                     IconButton(
                       icon: Icon(Icons.remove),
                       onPressed: () {
-                        if (sliderValue >= 10) {
+                        if (_sliderValue >= 10) {
                           setState(() {
-                            sliderValue -= 1.0;
+                            _sliderValue -= 1.0;
                           });
                         }
                       },
@@ -115,10 +116,10 @@ class _HomePageState extends State<HomePage> {
                         inactiveColor: Colors.grey[350],
                         min: 10.0,
                         max: 50.0,
-                        value: sliderValue,
+                        value: _sliderValue,
                         onChanged: (value) {
                           setState(() {
-                            sliderValue = value;
+                            _sliderValue = value;
                           });
                         },
                       ),
@@ -126,9 +127,9 @@ class _HomePageState extends State<HomePage> {
                     IconButton(
                       icon: Icon(Icons.add),
                       onPressed: () {
-                        if (sliderValue <= 50) {
+                        if (_sliderValue <= 50) {
                           setState(() {
-                            sliderValue += 1.0;
+                            _sliderValue += 1.0;
                           });
                         }
                       },
@@ -139,7 +140,7 @@ class _HomePageState extends State<HomePage> {
             ),
             Center(
               child: Text(
-                sliderValue.toInt().toString(),
+                _sliderValue.toInt().toString(),
                 style: TextStyle(
                   fontSize: 18.0,
                 ),
@@ -148,11 +149,12 @@ class _HomePageState extends State<HomePage> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
               child: TextField(
+                controller: _controller,
                 readOnly: true,
                 maxLines: maxLines,
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: "University",
+                  hintText: 'Password',
                   fillColor: darkmode ? Colors.grey[800] : Colors.grey[350],
                   filled: true,
                 ),
@@ -171,14 +173,17 @@ class _HomePageState extends State<HomePage> {
               color: Colors.blue,
               onPressed: () async {
                 if (!uppercase && !lowercase && !specialchars && !numbers) {
-                  _scaffoldkey.currentState.showSnackBar(
-                      SnackBar(content: Text('Select atleast one value')));
+                  _scaffoldkey.currentState.removeCurrentSnackBar();
+                  _scaffoldkey.currentState.showSnackBar(SnackBar(
+                    content: Text('Select atleast one value'),
+                    duration: Duration(milliseconds: 500),
+                  ));
                 } else {
                   Generator generator = new Generator();
                   await generator.addFunctions();
-                  String pass = generator.generate(sliderValue.toInt());
-                  print('Password Length:' + sliderValue.toInt().toString());
-                  print(pass);
+                  setState(() {
+                    _controller.text = generator.generate(_sliderValue.toInt());
+                  });
                 }
               },
             ),
