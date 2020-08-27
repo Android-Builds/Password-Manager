@@ -13,6 +13,8 @@ class _HomePageState extends State<HomePage> {
   double sliderValue = 10.0;
   @override
   Widget build(BuildContext context) {
+    darkmode =
+        MediaQuery.of(context).platformBrightness == Brightness.dark ?? false;
     return Scaffold(
       appBar: AppBar(
         title: Text('Password Manager'),
@@ -27,6 +29,7 @@ class _HomePageState extends State<HomePage> {
               ),
               title: Text('Include Uppercase Alphabets'),
               trailing: Checkbox(
+                activeColor: Colors.blue,
                 value: uppercase,
                 onChanged: (value) {
                   setState(() {
@@ -42,6 +45,7 @@ class _HomePageState extends State<HomePage> {
               ),
               title: Text('Include Special Characters'),
               trailing: Checkbox(
+                activeColor: Colors.blue,
                 value: specialchars,
                 onChanged: (value) {
                   setState(() {
@@ -57,6 +61,7 @@ class _HomePageState extends State<HomePage> {
               ),
               title: Text('Include Numbers'),
               trailing: Checkbox(
+                activeColor: Colors.blue,
                 value: numbers,
                 onChanged: (value) {
                   setState(() {
@@ -87,6 +92,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Expanded(
                       child: Slider(
+                        inactiveColor: Colors.grey[350],
                         min: 10.0,
                         max: 50.0,
                         divisions: 8,
@@ -116,7 +122,7 @@ class _HomePageState extends State<HomePage> {
               child: Text(
                 sliderValue.toInt().toString(),
                 style: TextStyle(
-                  fontSize: 20.0,
+                  fontSize: 18.0,
                 ),
               ),
             ),
@@ -128,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintText: "University",
-                  fillColor: Colors.grey[350],
+                  fillColor: darkmode ? Colors.grey[800] : Colors.grey[350],
                   filled: true,
                 ),
               ),
