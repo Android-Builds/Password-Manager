@@ -1,3 +1,3 @@
 bool uppercase = false;
-bool specialchar = false;
+bool specialchars = false;
 bool numbers = false;
