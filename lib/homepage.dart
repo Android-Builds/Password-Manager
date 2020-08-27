@@ -15,6 +15,64 @@ class _HomePageState extends State<HomePage> {
   final _scaffoldkey = GlobalKey<ScaffoldState>();
   TextEditingController _controller = new TextEditingController();
 
+  getButton() {
+    return _controller.text == ''
+        ? MaterialButton(
+            minWidth: 180,
+            height: 60,
+            child: Text(
+              'Generate',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20.0,
+              ),
+            ),
+            color: Colors.blue,
+            onPressed: () async {
+              if (!uppercase && !lowercase && !specialchars && !numbers) {
+                _scaffoldkey.currentState.removeCurrentSnackBar();
+                _scaffoldkey.currentState.showSnackBar(SnackBar(
+                  content: Text('Select atleast one value'),
+                  duration: Duration(milliseconds: 500),
+                ));
+              } else {
+                Generator generator = new Generator();
+                await generator.addFunctions();
+                setState(() {
+                  _controller.text = generator.generate(_sliderValue.toInt());
+                });
+              }
+            },
+          )
+        : Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                MaterialButton(
+                  minWidth: 140,
+                  height: 70,
+                  onPressed: () {
+                    setState(() {
+                      _controller.clear();
+                    });
+                  },
+                  color: Colors.blue,
+                  child: Text('Reset'),
+                ),
+                Spacer(),
+                MaterialButton(
+                  minWidth: 140,
+                  height: 70,
+                  color: Colors.blue,
+                  onPressed: () {},
+                  child: Text('Copy'),
+                ),
+              ],
+            ),
+          );
+  }
+
   @override
   Widget build(BuildContext context) {
     darkmode =
@@ -160,33 +218,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            MaterialButton(
-              minWidth: 180,
-              height: 60,
-              child: Text(
-                'Generate',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20.0,
-                ),
-              ),
-              color: Colors.blue,
-              onPressed: () async {
-                if (!uppercase && !lowercase && !specialchars && !numbers) {
-                  _scaffoldkey.currentState.removeCurrentSnackBar();
-                  _scaffoldkey.currentState.showSnackBar(SnackBar(
-                    content: Text('Select atleast one value'),
-                    duration: Duration(milliseconds: 500),
-                  ));
-                } else {
-                  Generator generator = new Generator();
-                  await generator.addFunctions();
-                  setState(() {
-                    _controller.text = generator.generate(_sliderValue.toInt());
-                  });
-                }
-              },
-            ),
+            getButton(),
           ],
         ),
       ),
