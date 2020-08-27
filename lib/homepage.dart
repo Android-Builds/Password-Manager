@@ -1,3 +1,4 @@
+import 'package:PassManager/models/generator.dart';
 import 'package:PassManager/utils/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int maxLines = 4;
   double sliderValue = 10.0;
+
   @override
   Widget build(BuildContext context) {
     darkmode =
@@ -95,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                         inactiveColor: Colors.grey[350],
                         min: 10.0,
                         max: 50.0,
-                        divisions: 8,
+                        // divisions: 8,
                         value: sliderValue,
                         onChanged: (value) {
                           setState(() {
@@ -150,7 +152,13 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               color: Colors.blue,
-              onPressed: () {},
+              onPressed: () async {
+                Generator generator = new Generator();
+                await generator.addFunctions();
+                String pass = generator.generate(sliderValue.toInt());
+                print('Password Length:' + sliderValue.toInt().toString());
+                print(pass);
+              },
             ),
           ],
         ),
