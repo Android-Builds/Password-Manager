@@ -34,6 +34,7 @@ class Generator {
   }
 
   String generate(int length) {
+    password = '';
     for (int i = 0; i < length; i++) {
       password += functions[_random.nextInt(functions.length)]();
     }
@@ -41,7 +42,10 @@ class Generator {
   }
 
   addFunctions() {
-    functions.add(getLowerCase);
+    functions.clear();
+    if (lowercase) {
+      functions.add(getLowerCase);
+    }
     if (uppercase) {
       functions.add(getUpperCase);
     }
@@ -51,6 +55,5 @@ class Generator {
     if (numbers) {
       functions.add(getNumbers);
     }
-    return 1;
   }
 }

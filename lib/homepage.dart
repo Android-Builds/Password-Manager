@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               contentPadding: EdgeInsets.symmetric(
                 horizontal: 20.0,
-                vertical: 10.0,
+                vertical: 5.0,
               ),
               title: Text('Include Uppercase Alphabets'),
               trailing: Checkbox(
@@ -43,7 +43,23 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               contentPadding: EdgeInsets.symmetric(
                 horizontal: 20.0,
-                vertical: 10.0,
+                vertical: 5.0,
+              ),
+              title: Text('Include Lowercase Alphabets'),
+              trailing: Checkbox(
+                activeColor: Colors.blue,
+                value: lowercase,
+                onChanged: (value) {
+                  setState(() {
+                    lowercase = value;
+                  });
+                },
+              ),
+            ),
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 20.0,
+                vertical: 5.0,
               ),
               title: Text('Include Special Characters'),
               trailing: Checkbox(
@@ -59,7 +75,7 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               contentPadding: EdgeInsets.symmetric(
                 horizontal: 20.0,
-                vertical: 10.0,
+                vertical: 5.0,
               ),
               title: Text('Include Numbers'),
               trailing: Checkbox(
@@ -75,7 +91,7 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               contentPadding: EdgeInsets.symmetric(
                 horizontal: 20.0,
-                vertical: 10.0,
+                vertical: 5.0,
               ),
               title: Text('Password Length: '),
               subtitle: Padding(
@@ -97,7 +113,6 @@ class _HomePageState extends State<HomePage> {
                         inactiveColor: Colors.grey[350],
                         min: 10.0,
                         max: 50.0,
-                        // divisions: 8,
                         value: sliderValue,
                         onChanged: (value) {
                           setState(() {
