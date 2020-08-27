@@ -65,25 +65,63 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(
                 horizontal: 20.0,
                 vertical: 10.0,
               ),
-              child: Slider(
-                min: 10.0,
-                max: 50.0,
-                divisions: 8,
-                value: sliderValue,
-                onChanged: (value) {
-                  setState(() {
-                    sliderValue = value;
-                  });
-                },
+              title: Text('Password Length: '),
+              subtitle: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.remove),
+                      onPressed: () {
+                        if (sliderValue >= 10) {
+                          setState(() {
+                            sliderValue -= 1.0;
+                          });
+                        }
+                      },
+                    ),
+                    Expanded(
+                      child: Slider(
+                        min: 10.0,
+                        max: 50.0,
+                        divisions: 8,
+                        value: sliderValue,
+                        onChanged: (value) {
+                          setState(() {
+                            sliderValue = value;
+                          });
+                        },
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.add),
+                      onPressed: () {
+                        if (sliderValue <= 50) {
+                          setState(() {
+                            sliderValue += 1.0;
+                          });
+                        }
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Center(
+              child: Text(
+                sliderValue.toInt().toString(),
+                style: TextStyle(
+                  fontSize: 20.0,
+                ),
               ),
             ),
             Container(
-              padding: EdgeInsets.all(20.0),
+              padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
               child: TextField(
                 readOnly: true,
                 maxLines: maxLines,
@@ -96,8 +134,8 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             MaterialButton(
-              minWidth: 200,
-              height: 80,
+              minWidth: 180,
+              height: 60,
               child: Text(
                 'Generate',
                 style: TextStyle(
