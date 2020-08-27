@@ -12,12 +12,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int maxLines = 4;
   double sliderValue = 10.0;
+  final _scaffoldkey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     darkmode =
         MediaQuery.of(context).platformBrightness == Brightness.dark ?? false;
     return Scaffold(
+      key: _scaffoldkey,
       appBar: AppBar(
         title: Text('Password Manager'),
       ),
@@ -168,11 +170,16 @@ class _HomePageState extends State<HomePage> {
               ),
               color: Colors.blue,
               onPressed: () async {
-                Generator generator = new Generator();
-                await generator.addFunctions();
-                String pass = generator.generate(sliderValue.toInt());
-                print('Password Length:' + sliderValue.toInt().toString());
-                print(pass);
+                if (!uppercase && !lowercase && !specialchars && !numbers) {
+                  _scaffoldkey.currentState.showSnackBar(
+                      SnackBar(content: Text('Select atleast one value')));
+                } else {
+                  Generator generator = new Generator();
+                  await generator.addFunctions();
+                  String pass = generator.generate(sliderValue.toInt());
+                  print('Password Length:' + sliderValue.toInt().toString());
+                  print(pass);
+                }
               },
             ),
           ],
