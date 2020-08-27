@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
@@ -8,20 +9,41 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      debugShowCheckedModeBanner: false,
+      title: 'Password Manager',
+      theme: ThemeData.light().copyWith(
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        scaffoldBackgroundColor: Colors.white,
+        appBarTheme: AppBarTheme(
+          elevation: 0.0,
+          color: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
+          textTheme: TextTheme(
+            headline6: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0),
+          ),
+        ),
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      darkTheme: ThemeData.dark().copyWith(
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        canvasColor: Colors.black,
+        scaffoldBackgroundColor: Colors.black,
+        bottomSheetTheme: BottomSheetThemeData(
+          backgroundColor: Colors.grey[900],
+        ),
+        appBarTheme: AppBarTheme(color: Colors.black),
+        popupMenuTheme: PopupMenuThemeData(color: Colors.black),
+        dialogBackgroundColor: Colors.black,
+      ),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
+  MyHomePage({Key key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -40,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('Password Manager'),
       ),
       body: Center(
         child: Column(
