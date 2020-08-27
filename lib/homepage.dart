@@ -1,6 +1,7 @@
 import 'package:PassManager/models/generator.dart';
 import 'package:PassManager/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key key}) : super(key: key);
@@ -65,7 +66,13 @@ class _HomePageState extends State<HomePage> {
                   minWidth: 140,
                   height: 70,
                   color: Colors.blue,
-                  onPressed: () {},
+                  onPressed: () {
+                    Clipboard.setData(ClipboardData(text: _controller.text));
+                    _scaffoldkey.currentState.showSnackBar(SnackBar(
+                      content: Text('Copied'),
+                      duration: Duration(milliseconds: 1000),
+                    ));
+                  },
                   child: Text('Copy'),
                 ),
               ],
