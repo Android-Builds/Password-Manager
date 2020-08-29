@@ -85,8 +85,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    darkmode =
-        MediaQuery.of(context).platformBrightness == Brightness.dark ?? false;
     return Scaffold(
       key: _scaffoldkey,
       appBar: AppBar(
