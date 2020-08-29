@@ -43,10 +43,12 @@ class _PinPageState extends State<PinPage> {
                         autofocus: true,
                         showCursor: true,
                         onChanged: (value) {
-                          _password += value;
-                          if (value == '') {
+                          if (value.isEmpty) {
+                            _password =
+                                _password.substring(0, _password.length - 1);
                             nodes[index].previousFocus();
                           } else {
+                            _password += value;
                             nodes[index].nextFocus();
                           }
                         },
