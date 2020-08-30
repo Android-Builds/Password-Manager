@@ -1,3 +1,4 @@
+import 'package:PassManager/homepage.dart';
 import 'package:PassManager/utils/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -70,7 +71,11 @@ class _PinPageState extends State<PinPage> {
               height: 50,
               color: Colors.blue,
               onPressed: () {
-                print(_password);
+                if (_password == '123456') {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomePage()));
+                }
+                ;
               })
         ],
       ),
