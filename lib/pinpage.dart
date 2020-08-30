@@ -51,16 +51,17 @@ class _PinPageState extends State<PinPage> {
                         autofocus: true,
                         showCursor: true,
                         onChanged: (value) {
-                          if (!isNumber(value)) {
-                            controller[index].clear();
-                          }
                           if (value.isEmpty) {
                             _password =
                                 _password.substring(0, _password.length - 1);
                             node[index].previousFocus();
                           } else {
-                            _password += value;
-                            node[index].nextFocus();
+                            if (!isNumber(value)) {
+                              controller[index].clear();
+                            } else {
+                              _password += value;
+                              node[index].nextFocus();
+                            }
                           }
                         },
                         keyboardType: TextInputType.number,
