@@ -9,13 +9,20 @@ class PinPage extends StatefulWidget {
 
 class _PinPageState extends State<PinPage> {
   String _password = '';
-  List<FocusNode> nodes = List<FocusNode>();
+  List<FocusNode> node = List<FocusNode>();
+  List<TextEditingController> controller = List<TextEditingController>();
+  List<String> numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+
+  bool isNumber(String string) {
+    return numbers.contains(string);
+  }
 
   @override
   void initState() {
     super.initState();
     for (int i = 0; i < 6; i++) {
-      nodes.add(new FocusNode());
+      node.add(new FocusNode());
+      controller.add(new TextEditingController());
     }
   }
 
@@ -38,19 +45,22 @@ class _PinPageState extends State<PinPage> {
                       width: 55.0,
                       padding: EdgeInsets.symmetric(horizontal: 5.0),
                       child: TextField(
-                        controller: new TextEditingController(),
+                        controller: controller[index],
                         maxLength: 1,
-                        focusNode: nodes[index],
+                        focusNode: node[index],
                         autofocus: true,
                         showCursor: true,
                         onChanged: (value) {
+                          if (!isNumber(value)) {
+                            controller[index].clear();
+                          }
                           if (value.isEmpty) {
                             _password =
                                 _password.substring(0, _password.length - 1);
-                            nodes[index].previousFocus();
+                            node[index].previousFocus();
                           } else {
                             _password += value;
-                            nodes[index].nextFocus();
+                            node[index].nextFocus();
                           }
                         },
                         keyboardType: TextInputType.number,
@@ -75,7 +85,6 @@ class _PinPageState extends State<PinPage> {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => HomePage()));
                 }
-                ;
               })
         ],
       ),
