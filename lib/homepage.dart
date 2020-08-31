@@ -1,4 +1,5 @@
 import 'package:PassManager/generatepass.dart';
+import 'package:PassManager/storepage.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -25,7 +26,7 @@ class _HomePageState extends State<HomePage> {
         ),
         body: TabBarView(
           children: [
-            Icon(Icons.directions_car),
+            StoragePage(),
             PassGenerator(),
           ],
         ),
