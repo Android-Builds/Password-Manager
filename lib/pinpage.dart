@@ -63,6 +63,7 @@ class _PinPageState extends State<PinPage> {
                               node[index].nextFocus();
                             }
                           }
+                          print(_password);
                         },
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
@@ -83,7 +84,7 @@ class _PinPageState extends State<PinPage> {
               color: Colors.blue,
               onPressed: () {
                 if (_password == '123456') {
-                  Navigator.push(context,
+                  Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => HomePage()));
                 }
               })

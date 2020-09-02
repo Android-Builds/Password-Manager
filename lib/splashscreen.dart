@@ -69,7 +69,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Route route = value
               ? MaterialPageRoute(builder: (context) => HomePage())
               : MaterialPageRoute(builder: (context) => PinPage());
-          Navigator.push(context, route);
+          Navigator.pushReplacement(context, route);
         }));
   }
 
