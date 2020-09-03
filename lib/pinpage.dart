@@ -63,7 +63,6 @@ class _PinPageState extends State<PinPage> {
                               node[index].nextFocus();
                             }
                           }
-                          print(_password);
                         },
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(

@@ -11,45 +11,41 @@ class _StoragePageState extends State<StoragePage> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 10.0),
       child: Column(
         children: [
-          Row(
-            children: [
-              Text('Username / Email: '),
-              Expanded(
-                child: TextField(
-                  controller: _controller,
-                  readOnly: true,
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Password',
-                    fillColor: darkmode ? Colors.grey[800] : Colors.grey[350],
-                    filled: true,
-                  ),
+          ListTile(
+            title: Text('Username / Email: '),
+            subtitle: Expanded(
+              child: TextField(
+                controller: _controller,
+                readOnly: true,
+                maxLines: 1,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Password',
+                  fillColor: darkmode ? Colors.grey[800] : Colors.grey[350],
+                  filled: true,
                 ),
               ),
-            ],
+            ),
           ),
           SizedBox(height: 20),
-          Row(
-            children: [
-              Text('Password: '),
-              Expanded(
-                child: TextField(
-                  controller: _controller,
-                  readOnly: true,
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Password',
-                    fillColor: darkmode ? Colors.grey[800] : Colors.grey[350],
-                    filled: true,
-                  ),
+          ListTile(
+            title: Text('Password: '),
+            subtitle: Expanded(
+              child: TextField(
+                controller: _controller,
+                readOnly: true,
+                maxLines: 1,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Password',
+                  fillColor: darkmode ? Colors.grey[800] : Colors.grey[350],
+                  filled: true,
                 ),
               ),
-            ],
+            ),
           ),
         ],
       ),
