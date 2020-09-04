@@ -14,7 +14,6 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   final LocalAuthentication auth = LocalAuthentication();
-  List<BiometricType> _availableBiometrics;
 
   Future<bool> _checkBiometrics() async {
     bool canCheckBiometrics;
@@ -26,20 +25,6 @@ class _SplashScreenState extends State<SplashScreen> {
     if (!mounted) return false;
 
     return canCheckBiometrics;
-  }
-
-  Future<void> _getAvailableBiometrics() async {
-    List<BiometricType> availableBiometrics;
-    try {
-      availableBiometrics = await auth.getAvailableBiometrics();
-    } on PlatformException catch (e) {
-      print(e);
-    }
-    if (!mounted) return;
-
-    setState(() {
-      _availableBiometrics = availableBiometrics;
-    });
   }
 
   Future<bool> _authenticate() async {
@@ -57,10 +42,6 @@ class _SplashScreenState extends State<SplashScreen> {
     if (!mounted) return false;
 
     return authenticated;
-  }
-
-  void _cancelAuthentication() {
-    auth.stopAuthentication();
   }
 
   void initState() {
