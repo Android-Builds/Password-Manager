@@ -7,7 +7,9 @@ class StoragePage extends StatefulWidget {
 }
 
 class _StoragePageState extends State<StoragePage> {
-  TextEditingController _controller = new TextEditingController();
+  TextEditingController _username = new TextEditingController();
+  TextEditingController _password = new TextEditingController();
+  TextEditingController _url = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -18,7 +20,7 @@ class _StoragePageState extends State<StoragePage> {
             title: Text('Username / Email: '),
             subtitle: Expanded(
               child: TextField(
-                controller: _controller,
+                controller: _username,
                 readOnly: true,
                 maxLines: 1,
                 decoration: InputDecoration(
@@ -35,7 +37,24 @@ class _StoragePageState extends State<StoragePage> {
             title: Text('Password: '),
             subtitle: Expanded(
               child: TextField(
-                controller: _controller,
+                controller: _password,
+                readOnly: true,
+                obscureText: true,
+                maxLines: 1,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Password',
+                  fillColor: darkmode ? Colors.grey[800] : Colors.grey[350],
+                  filled: true,
+                ),
+              ),
+            ),
+          ),
+          ListTile(
+            title: Text('Url: '),
+            subtitle: Expanded(
+              child: TextField(
+                controller: _url,
                 readOnly: true,
                 maxLines: 1,
                 decoration: InputDecoration(
